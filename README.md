@@ -1,5 +1,5 @@
 # Bears-Team-7
-# Bears-Team-7
+
 Resto is an app where you can share, search and recommend your favorite restaurants
 [Chingu](https://chingu.io/) | [Voyage-5](https://github.com/chingu-voyage5)  
 
