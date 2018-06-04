@@ -50,12 +50,17 @@ See link below for instructions on how to get your development environment setup
   * [React](https://reactjs.org/) v16
   * [React Router](https://www.npmjs.com/package/react-router)
   * [Styled Components](https://www.styled-components.com/)
+  * [Apollo Client](https://www.apollographql.com/client)
 * Back End  
   * [Express](https://expressjs.com/)
   * [Node](https://nodejs.org/en/)
+  * [Apollo Server](https://www.apollographql.com/servers)
 * Database  
   * [MongoDB](https://www.mongodb.com/)
   * [Passport](https://github.com/jaredhanson/passport-oauth2) (local & google oauth2) for authentication
+* APIs
+  * [GraphQL](https://graphql.org/)
+  * [Yelp API](https://www.yelp.com/developers/graphql/guides/intro)
 * Style Guides
   * [AirBnB Javascript Style Guide](https://github.com/airbnb/javascript)
 * Development
@@ -69,6 +74,6 @@ See link below for instructions on how to get your development environment setup
 [Tim H](https://github.com/thurst28)  
 
 ## License
-[License](https://github.com/chingu-voyage5/Bears-Team-5/blob/master/LICENSE)\
+[License](https://github.com/chingu-voyage5/Bears-Team-7/blob/master/LICENSE)\
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app)  
