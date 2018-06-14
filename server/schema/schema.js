@@ -11,11 +11,54 @@ const {
   GraphQLNonNull
 } = graphql;
 
+//dummy data
+const places = [{
+  id: "1",
+  yelp_id: "SGRmnarrNuVEsAjYdEoA0w",
+  name: "El Farolito",
+  is_closed: false,
+  lat: 37.75265,
+  lng: -122.41812,
+  phone: "(415) 824-7877",
+  address: "2779 Mission St",
+  city: "San Francisco",
+  state: "CA",
+  country: "US"
+}, {
+  id: "2",
+  yelp_id: "JARsJVKLPgs_yC3cwDnp7g",
+  name: "La Taqueria",
+  is_closed: false,
+  lat: 37.750883,
+  lng: -122.418123,
+  phone: "(415) 524-7677",
+  address1: "2889 Mission St",
+  city: "San Francisco",
+  state: "CA",
+  country: "US"
+}, {
+  id: "3",
+  yelp_id: "g0VCHer2uE5NLOEdblZuSw",
+  name: "Taqueria Cancún",
+  is_closed: false,
+  lat: 37.76047,
+  lng: -122.41951,
+  phone: "(415) 224-4873",
+  address1: "2288 Mission St",
+  city: "San Francisco",
+  state: "CA",
+  country: "US"
+}]
+
+/**
+ * TODO
+ * When mongodb is ready please change id type to GraphQLID
+ */
 const PlaceType = new GraphQLObjectType({
   name: 'Place',
   fields: () => ({
     id: {
-      type: GraphQLID
+      type: GraphQLString
     },
     image: {
       type: GraphQLString
@@ -26,8 +69,17 @@ const PlaceType = new GraphQLObjectType({
     price: {
       type: GraphQLInt
     },
-    location: {
-      type: GraphQLList
+    address: {
+      type: GraphQLString
+    },
+    city: {
+      type: GraphQLString
+    },
+    state: {
+      type: GraphQLString
+    },
+    country: {
+      type: GraphQLString
     },
     lat: {
       type: GraphQLFloat
@@ -43,10 +95,17 @@ const PlaceType = new GraphQLObjectType({
     },
     yelp_id: {
       type: GraphQLString
+    },
+    counter: {
+      type: GraphQLInt
     }
   })
 });
 
+/**
+ * TODO
+ * When mongodb is ready please change id type to GraphQLID
+ */
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
@@ -55,7 +114,7 @@ const RootQuery = new GraphQLObjectType({
       description: 'Returns a single place',
       args: {
         id: {
-          type: GraphQLID
+          type: GraphQLNonNull(GraphQLString)
         }
       },
       resolve(parent, args) {
