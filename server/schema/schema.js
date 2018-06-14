@@ -26,7 +26,9 @@ const PlaceType = new GraphQLObjectType({
     price: {
       type: GraphQLInt
     },
-    //location: { type}
+    location: {
+      type: GraphQLList
+    },
     lat: {
       type: GraphQLFloat
     },
@@ -50,6 +52,7 @@ const RootQuery = new GraphQLObjectType({
   fields: {
     place: {
       type: PlaceType,
+      description: 'Returns a single place',
       args: {
         id: {
           type: GraphQLID
@@ -62,6 +65,7 @@ const RootQuery = new GraphQLObjectType({
     },
     places: {
       type: new GraphQLList(PlaceType),
+      description: 'Returns a list of places',
       resolve(parent, args) {
         return places;
       }
