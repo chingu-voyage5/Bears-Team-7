@@ -44,3 +44,31 @@ const PlaceType = new GraphQLObjectType({
     }
   })
 });
+
+const RootQuery = new GraphQLObjectType({
+  name: 'RootQueryType',
+  fields: {
+    place: {
+      type: PlaceType,
+      args: {
+        id: {
+          type: GraphQLID
+        }
+      },
+      resolve(parent, args) {
+        // code to get data from db / other source
+        return places.find(place => place.id === args.id);
+      }
+    },
+    places: {
+      type: new GraphQLList(PlaceType),
+      resolve(parent, args) {
+        return places;
+      }
+    }
+  }
+});
+
+module.exports = new GraphQLSchema({
+  query: RootQuery
+})
