@@ -76,6 +76,23 @@ const coords = [{
   }
 ]
 
+const users = [{
+    id: '1',
+    username: 'Julis',
+    email: 'julis@mail.com'
+  },
+  {
+    id: '2',
+    username: 'Queso',
+    email: 'queso@mail.com'
+  },
+  {
+    id: '3',
+    username: 'Lolu',
+    email: 'lolui@mail.com'
+  }
+]
+
 /**
  * TODO
  * When mongodb is ready please change id type to GraphQLID
@@ -175,6 +192,28 @@ const CoordinatesType = new GraphQLObjectType({
       description: 'Longitude of the place'
     }
   })
+});
+
+/**
+ * UserType
+ */
+
+const UserType = new GraphQLObjectType({
+  name: 'UserType',
+  fields: () => ({
+    id: {
+      type: GraphQLString,
+      description: 'Unique id'
+    },
+    username: {
+      type: GraphQLString,
+      description: 'Unique pick username'
+    },
+    email: {
+      type: GraphQLString,
+      description: 'Unique user email'
+    }
+  })
 })
 
 /**
@@ -218,16 +257,35 @@ const RootQuery = new GraphQLObjectType({
     },
     coordinates: {
       type: CoordinatesType,
-      description: 'Retirns coordinates from a single place',
+      description: 'Returns coordinates from a single place',
       args: {
         id: {
           type: GraphQLNonNull(GraphQLString)
         }
       },
-      resolve(parent) {
+      resolve(parent, args) {
         return coords.find(coord => coord.id === args.id);
+      },
+    },
+    user: {
+      type: UserType,
+      description: 'Returns user data',
+      args: {
+        id: {
+          type: GraphQLNonNull(GraphQLString)
+        }
+      },
+      resolve(parent, args) {
+        return users.find(user => user.id === args.id);
       }
-    }
+    },
+    users: {
+      type: new GraphQLList(UserType),
+      description: 'Returns a list of users',
+      resolve(parent, args) {
+        return users;
+      }
+    },
   }
 });
 
