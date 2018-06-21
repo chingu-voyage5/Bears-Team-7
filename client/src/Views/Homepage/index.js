@@ -26,7 +26,11 @@ class Homepage extends Component {
       const { longitude, latitude } = pos.coords;
       this.setLocation(longitude, latitude);
     };
-    const error = e => console.error(e);
+    const error = e => {
+      const longitude = "-80.19366";
+      const latitude = "25.77427";
+      this.setLocation(longitude, latitude);
+    };
     navigator.geolocation.getCurrentPosition(success, error, options);
   }
 
@@ -44,9 +48,9 @@ class Homepage extends Component {
       .then(data => {
         if (data.results[0] !== undefined) {
           let source = data.results[0].components;
-          let city = source.hamlet;
+          let city = source.city;
           let country = source["ISO_3166-1_alpha-2"];
-          this.setState({ cityName: `${city} ${country}` });
+          this.setState({ cityName: `${city}, ${country}` });
         }
       })
       .catch(e => console.error(e));
@@ -57,12 +61,17 @@ class Homepage extends Component {
   }
 
   handleSearchButton() {
-    const { search, location } = this.state;
-    this.searchYelp(search, location);
+    const { search, cityName } = this.state;
+    search !== "" && this.searchYelp(search, cityName);
   }
 
   searchYelp(search, location) {
-    console.log(search, location);
+    const limit = 5;
+    const url = `/term=${search}&location=${location}&limit=${limit}`;
+    fetch(url)
+      .then(res => res.json())
+      .then(data => console.log(data))
+      .catch(e => console.error(e));
   }
 
   render() {
@@ -71,7 +80,7 @@ class Homepage extends Component {
       <div className="Homepage">
         <h1>Resto</h1>
         <p>I'm in</p>
-        <p>{cityName}</p>
+        <Input handleChange={this.handleSearchInput} value={cityName} />
         <p>and love to try</p>
         <Input handleChange={this.handleSearchInput} value={search} />
         <Button handleClick={this.handleSearchButton} text={"Search"} />

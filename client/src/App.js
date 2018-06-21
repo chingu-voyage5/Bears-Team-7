@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import HomePage from "./Views/Homepage"
-import './App.css';
+import React, { Component } from "react";
+import HomePage from "./Views/Homepage";
+import ResturantList from "./Views/ResturantList";
+import "./App.css";
 
 class App extends Component {
   render() {
