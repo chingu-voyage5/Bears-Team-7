@@ -12,7 +12,7 @@ require('dotenv').config();
 //Set up middleware endpoint to understand GraphQL
 app.use('/graphql', graphqlHTTP({
   schema,
-  graphiql: true //For development 
+  graphiql: true //For development
 }))
 
 const client = yelpFusion.client(process.env.ACCESS_TOKEN);
