@@ -1,0 +1,6 @@
+datamodel: datamodel.graphql
+hooks:
+  post-deploy:
+    - echo "Deployment finished"
+    - graphql get-schema --project prisma
+    - graphql prepare
