@@ -1,0 +1,53 @@
+# import User, Business, Businesses, Location, Coordinates, Categories, Loving, Watching from "./generated/prisma.graphql"
+
+type Query {
+  me: User
+  search(term: String!, location: String!, limit: Int = 5): Businesses
+  business(id: String!): Business!
+}
+
+type Mutation {
+  signup(email: String!, password: String!, name: String!): AuthPayload!
+  login(email: String!, password: String!): AuthPayload!
+  createBusiness(
+    yelpId: String!
+    name: String!
+    price: String
+    photos: String
+    address: String
+    city: String
+    state: String
+    country: String
+    longitude: Float
+    latitude: Float
+    cat_title: String
+  ): Business!
+  updateBusiness(
+    placeId: ID!
+    yelpId: String
+    name: String
+    price: String
+    photos: String
+    address: String
+    city: String
+    state: String
+    country: String
+    longitude: Float
+    latitude: Float
+    cat_title: String
+  ): Business!
+  addLoveToBusiness(placeId: ID!): Loving!
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
+type User {
+  id: ID!
+  email: String!
+  name: String!
+  loving: [Loving!]!
+  watching: [Watching!]!
+}

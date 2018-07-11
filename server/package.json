@@ -13,12 +13,18 @@
   "author": "Chingu Voyage 5 - Bears Team 7",
   "license": "ISC",
   "dependencies": {
+    "apollo-link-http": "^1.5.4",
+    "bcryptjs": "^2.4.3",
     "dotenv": "^6.0.0",
-    "express": "^4.16.3",
-    "express-graphql": "^0.6.12",
     "graphql": "^0.13.2",
-    "nodemon": "^1.17.5",
-    "querystringify": "^2.0.0",
-    "yelp-fusion": "^2.0.3"
+    "graphql-binding": "^2.1.1",
+    "graphql-tools": "^3.0.5",
+    "graphql-yoga": "^1.14.12",
+    "jsonwebtoken": "^8.3.0",
+    "node-fetch": "^2.1.2",
+    "prisma-binding": "^2.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.1"
   }
 }
