@@ -4,3 +4,4 @@ hooks:
     - echo "Deployment finished"
     - graphql get-schema --project prisma
     - graphql prepare
+endpoint: ${env:PRISMA_ENDPOINT}
