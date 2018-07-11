@@ -22,7 +22,9 @@
     "graphql-yoga": "^1.14.12",
     "jsonwebtoken": "^8.3.0",
     "node-fetch": "^2.1.2",
-    "nodemon": "^1.17.5",
     "prisma-binding": "^2.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.1"
   }
 }
