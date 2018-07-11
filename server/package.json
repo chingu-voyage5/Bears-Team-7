@@ -13,9 +13,11 @@
   "author": "Chingu Voyage 5 - Bears Team 7",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "dotenv": "^6.0.0",
     "graphql": "^0.13.2",
     "graphql-yoga": "^1.14.12",
+    "jsonwebtoken": "^8.3.0",
     "nodemon": "^1.17.5",
     "prisma-binding": "^2.1.0"
   }
