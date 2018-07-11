@@ -9,7 +9,7 @@ type Query {
 type Mutation {
   signup(email: String!, password: String!, name: String!): AuthPayload!
   login(email: String!, password: String!): AuthPayload!
-  createPlace(
+  createBusiness(
     yelpId: String!
     name: String!
     price: String
@@ -22,7 +22,7 @@ type Mutation {
     latitude: Float
     cat_title: String
   ): Business!
-  updatePlace(
+  updateBusiness(
     placeId: ID!
     yelpId: String
     name: String
@@ -36,7 +36,7 @@ type Mutation {
     latitude: Float
     cat_title: String
   ): Business!
-  addLovePlace(placeId: ID!): Loving!
+  addLoveToBusiness(placeId: ID!): Loving!
 }
 
 type AuthPayload {
