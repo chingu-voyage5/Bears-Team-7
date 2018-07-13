@@ -2,8 +2,9 @@
 
 type Query {
   me: User
-  search(term: String!, location: String!, limit: Int = 5): Businesses
-  business(id: String!): Business!
+  business(id: String!): Business! #Resto Api
+  searchFromYelp(term: String!, location: String!, limit: Int = 5): Businesses # Yelp Api
+  businessFromYelp(id: String!): Business! # Yelp Api
 }
 
 type Mutation {
