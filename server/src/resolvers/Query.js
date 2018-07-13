@@ -11,15 +11,20 @@ const Query = {
       }
     }, info)
   },
-  business(parent, {
+  async business(parent, {
     id
   }, context, info) {
-    return context.db.query.business({
+    const queriedBusiness = await context.db.query.business({
         where: {
           id
         }
       },
       info)
+    if (queriedBusiness) {
+      return queriedBusiness
+    }
+
+    throw new Error(`Couldn't find business id: ${id}`)
   }
 }
 
