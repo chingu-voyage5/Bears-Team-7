@@ -1,4 +1,4 @@
-# import User, Business, Businesses, Location, Coordinates, Categories, Loving, Watching from "./generated/prisma.graphql"
+# import User, Business, Location, Coordinates, Categories, Loving, Watching from "./generated/prisma.graphql"
 
 type Query {
   me: User
@@ -10,6 +10,7 @@ type Query {
 type Mutation {
   signup(email: String!, password: String!, name: String!): AuthPayload!
   login(email: String!, password: String!): AuthPayload!
+  signout: SuccessMessage
   createBusiness(
     yelpId: String!
     name: String!
@@ -24,7 +25,7 @@ type Mutation {
     cat_title: String
   ): Business!
   updateBusiness(
-    placeId: ID!
+    id: ID!
     yelpId: String
     name: String
     price: String
@@ -38,6 +39,7 @@ type Mutation {
     cat_title: String
   ): Business!
   addLoveToBusiness(placeId: ID!): Loving!
+  removeLoveToBusiness(placeId: ID!): Loving!
 }
 
 type AuthPayload {
@@ -51,4 +53,13 @@ type User {
   name: String!
   loving: [Loving!]!
   watching: [Watching!]!
+}
+
+type Businesses {
+  business: [Business!]!
+  total: Int
+}
+
+type SuccessMessage {
+  message: String
 }
