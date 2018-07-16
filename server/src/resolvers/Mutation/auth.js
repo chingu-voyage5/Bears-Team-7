@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken')
 
 const auth = {
   async signup(parent, args, ctx, info) {
+    args.email = args.email.toLowerCase()
     const password = await bcrypt.hash(args.password, 10)
     const user = await ctx.db.mutation.createUser({
       data: { ...args,
@@ -10,14 +11,17 @@ const auth = {
       },
     })
 
-    return {
-      token: jwt.sign({
-        userId: user.id
-      }, process.env.APP_SECRET),
-      user,
-    }
+    const token = jwt.sign({userId: user.id}, process.env.APP_SECRET)
+    ctx.response.cookie('token', token, {
+      maxAge: 1000 * 60 * 60 * 24 * 365,
+      httpOnly: true,
+    })
+    return {user, token}
   },
-
+  async signout(parent, args, ctx, info) {
+    ctx.response.clearCookie('token')
+    return { message: 'Goodbye!'}
+  },
   async login(parent, {
     email,
     password
@@ -36,12 +40,12 @@ const auth = {
       throw new Error('Invalid password')
     }
 
-    return {
-      token: jwt.sign({
-        userId: user.id
-      }, process.env.APP_SECRET),
-      user,
-    }
+    const token = jwt.sign({userId: user.id}, process.env.APP_SECRET)
+    ctx.response.cookie('token', token, {
+      maxAge: 1000 * 60 * 60 * 24 * 365,
+      httpOnly: true,
+    })
+    return {user, token}
   },
 }
 
