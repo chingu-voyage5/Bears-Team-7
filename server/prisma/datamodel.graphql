@@ -40,11 +40,6 @@ type Categories {
   title: String
 }
 
-type Businesses {
-  business: [Business!]!
-  total: Int
-}
-
 type Loving {
   id: ID! @unique
   business: Business!
