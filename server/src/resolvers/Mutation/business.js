@@ -53,6 +53,16 @@ const business = {
     }
     throw new Error(`Place can't be created`)
   },
+  async updateBusiness (parent, args, context, info) {
+    const updates = {...args}
+    delete updates.id
+    return context.db.mutation.updateBusiness({
+      where: { id: args.id },
+      data: {
+        ...updates,
+      }
+    },info)
+  },
   async addLoveToBusiness(parent, args, context, info) {
     const userId = getUserId(context)
 
@@ -85,6 +95,32 @@ const business = {
       },
       info
     )
+  },
+  async removeLoveToBusiness(parent, args, context, info) {
+    const userId = getUserId(context)
+    const where = {
+      id: args.placeId
+    }
+
+    const loving = await context.db.query.lovings({
+      lover: {
+        id: userId
+      },
+      business: {
+        id: args.placeId
+      }
+    })
+    if (loving) {
+      return context.db.mutation.deleteLoving({
+       where:{
+         id: loving[0].id
+       }
+      },
+      info
+    )
+    }
+
+    throw new Error(`User doesn't love this place`)
   }
 }
 
