@@ -1,11 +1,7 @@
 # source: https://us1.prisma.sh/juliana-b31c0d/resto-app/dev
-# timestamp: Wed Jul 11 2018 10:22:26 GMT-0400 (EDT)
+# timestamp: Mon Jul 16 2018 16:09:44 GMT-0400 (EDT)
 
 type AggregateBusiness {
-  count: Int!
-}
-
-type AggregateBusinesses {
   count: Int!
 }
 
@@ -79,11 +75,6 @@ input BusinessCreateInput {
   lovers: LovingCreateManyWithoutBusinessInput
 }
 
-input BusinessCreateManyInput {
-  create: [BusinessCreateInput!]
-  connect: [BusinessWhereUniqueInput!]
-}
-
 input BusinessCreateOneWithoutLoversInput {
   create: BusinessCreateWithoutLoversInput
   connect: BusinessWhereUniqueInput
@@ -127,130 +118,6 @@ type BusinessEdge {
 
   """A cursor for use in pagination."""
   cursor: String!
-}
-
-type Businesses {
-  business(where: BusinessWhereInput, orderBy: BusinessOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Business!]
-  total: Int
-}
-
-"""A connection to a list of items."""
-type BusinessesConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [BusinessesEdge]!
-  aggregate: AggregateBusinesses!
-}
-
-input BusinessesCreateInput {
-  total: Int
-  business: BusinessCreateManyInput
-}
-
-"""An edge in a connection."""
-type BusinessesEdge {
-  """The item at the end of the edge."""
-  node: Businesses!
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
-enum BusinessesOrderByInput {
-  total_ASC
-  total_DESC
-  id_ASC
-  id_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
-}
-
-type BusinessesPreviousValues {
-  total: Int
-}
-
-type BusinessesSubscriptionPayload {
-  mutation: MutationType!
-  node: Businesses
-  updatedFields: [String!]
-  previousValues: BusinessesPreviousValues
-}
-
-input BusinessesSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [BusinessesSubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [BusinessesSubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [BusinessesSubscriptionWhereInput!]
-
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
-  mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
-  updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
-  updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
-  updatedFields_contains_some: [String!]
-  node: BusinessesWhereInput
-}
-
-input BusinessesUpdateInput {
-  total: Int
-  business: BusinessUpdateManyInput
-}
-
-input BusinessesWhereInput {
-  """Logical AND on all given filters."""
-  AND: [BusinessesWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [BusinessesWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [BusinessesWhereInput!]
-  total: Int
-
-  """All values that are not equal to given value."""
-  total_not: Int
-
-  """All values that are contained in given list."""
-  total_in: [Int!]
-
-  """All values that are not contained in given list."""
-  total_not_in: [Int!]
-
-  """All values less than the given value."""
-  total_lt: Int
-
-  """All values less than or equal the given value."""
-  total_lte: Int
-
-  """All values greater than the given value."""
-  total_gt: Int
-
-  """All values greater than or equal the given value."""
-  total_gte: Int
-  business_every: BusinessWhereInput
-  business_some: BusinessWhereInput
-  business_none: BusinessWhereInput
 }
 
 enum BusinessOrderByInput {
@@ -325,20 +192,6 @@ input BusinessSubscriptionWhereInput {
   node: BusinessWhereInput
 }
 
-input BusinessUpdateDataInput {
-  name: String
-  yelpId: String
-  price: String
-  photos: String
-  isLoved: Boolean
-  isWatched: Boolean
-  location: LocationUpdateOneInput
-  coordinates: CoordinatesUpdateOneInput
-  categories: CategoriesUpdateManyInput
-  watchers: WatchingUpdateManyWithoutBusinessInput
-  lovers: LovingUpdateManyWithoutBusinessInput
-}
-
 input BusinessUpdateInput {
   name: String
   yelpId: String
@@ -351,15 +204,6 @@ input BusinessUpdateInput {
   categories: CategoriesUpdateManyInput
   watchers: WatchingUpdateManyWithoutBusinessInput
   lovers: LovingUpdateManyWithoutBusinessInput
-}
-
-input BusinessUpdateManyInput {
-  create: [BusinessCreateInput!]
-  connect: [BusinessWhereUniqueInput!]
-  disconnect: [BusinessWhereUniqueInput!]
-  delete: [BusinessWhereUniqueInput!]
-  update: [BusinessUpdateWithWhereUniqueNestedInput!]
-  upsert: [BusinessUpsertWithWhereUniqueNestedInput!]
 }
 
 input BusinessUpdateOneWithoutLoversInput {
@@ -404,11 +248,6 @@ input BusinessUpdateWithoutWatchersDataInput {
   lovers: LovingUpdateManyWithoutBusinessInput
 }
 
-input BusinessUpdateWithWhereUniqueNestedInput {
-  where: BusinessWhereUniqueInput!
-  data: BusinessUpdateDataInput!
-}
-
 input BusinessUpsertWithoutLoversInput {
   update: BusinessUpdateWithoutLoversDataInput!
   create: BusinessCreateWithoutLoversInput!
@@ -417,12 +256,6 @@ input BusinessUpsertWithoutLoversInput {
 input BusinessUpsertWithoutWatchersInput {
   update: BusinessUpdateWithoutWatchersDataInput!
   create: BusinessCreateWithoutWatchersInput!
-}
-
-input BusinessUpsertWithWhereUniqueNestedInput {
-  where: BusinessWhereUniqueInput!
-  update: BusinessUpdateDataInput!
-  create: BusinessCreateInput!
 }
 
 input BusinessWhereInput {
@@ -697,9 +530,6 @@ input BusinessWhereInput {
   lovers_every: LovingWhereInput
   lovers_some: LovingWhereInput
   lovers_none: LovingWhereInput
-  _MagicalBackRelation_BusinessToBusinesses_every: BusinessesWhereInput
-  _MagicalBackRelation_BusinessToBusinesses_some: BusinessesWhereInput
-  _MagicalBackRelation_BusinessToBusinesses_none: BusinessesWhereInput
 }
 
 input BusinessWhereUniqueInput {
@@ -1545,40 +1375,37 @@ input LovingWhereUniqueInput {
 
 type Mutation {
   createUser(data: UserCreateInput!): User!
-  createBusinesses(data: BusinessesCreateInput!): Businesses!
+  createBusiness(data: BusinessCreateInput!): Business!
   createLoving(data: LovingCreateInput!): Loving!
   createWatching(data: WatchingCreateInput!): Watching!
   createLocation(data: LocationCreateInput!): Location!
   createCoordinates(data: CoordinatesCreateInput!): Coordinates!
-  createBusiness(data: BusinessCreateInput!): Business!
   createCategories(data: CategoriesCreateInput!): Categories!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateBusiness(data: BusinessUpdateInput!, where: BusinessWhereUniqueInput!): Business
   updateLoving(data: LovingUpdateInput!, where: LovingWhereUniqueInput!): Loving
   updateWatching(data: WatchingUpdateInput!, where: WatchingWhereUniqueInput!): Watching
-  updateBusiness(data: BusinessUpdateInput!, where: BusinessWhereUniqueInput!): Business
   deleteUser(where: UserWhereUniqueInput!): User
+  deleteBusiness(where: BusinessWhereUniqueInput!): Business
   deleteLoving(where: LovingWhereUniqueInput!): Loving
   deleteWatching(where: WatchingWhereUniqueInput!): Watching
-  deleteBusiness(where: BusinessWhereUniqueInput!): Business
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  upsertBusiness(where: BusinessWhereUniqueInput!, create: BusinessCreateInput!, update: BusinessUpdateInput!): Business!
   upsertLoving(where: LovingWhereUniqueInput!, create: LovingCreateInput!, update: LovingUpdateInput!): Loving!
   upsertWatching(where: WatchingWhereUniqueInput!, create: WatchingCreateInput!, update: WatchingUpdateInput!): Watching!
-  upsertBusiness(where: BusinessWhereUniqueInput!, create: BusinessCreateInput!, update: BusinessUpdateInput!): Business!
   updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
-  updateManyBusinesseses(data: BusinessesUpdateInput!, where: BusinessesWhereInput): BatchPayload!
+  updateManyBusinesses(data: BusinessUpdateInput!, where: BusinessWhereInput): BatchPayload!
   updateManyLovings(data: LovingUpdateInput!, where: LovingWhereInput): BatchPayload!
   updateManyWatchings(data: WatchingUpdateInput!, where: WatchingWhereInput): BatchPayload!
   updateManyLocations(data: LocationUpdateInput!, where: LocationWhereInput): BatchPayload!
   updateManyCoordinateses(data: CoordinatesUpdateInput!, where: CoordinatesWhereInput): BatchPayload!
-  updateManyBusinesses(data: BusinessUpdateInput!, where: BusinessWhereInput): BatchPayload!
   updateManyCategorieses(data: CategoriesUpdateInput!, where: CategoriesWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
-  deleteManyBusinesseses(where: BusinessesWhereInput): BatchPayload!
+  deleteManyBusinesses(where: BusinessWhereInput): BatchPayload!
   deleteManyLovings(where: LovingWhereInput): BatchPayload!
   deleteManyWatchings(where: WatchingWhereInput): BatchPayload!
   deleteManyLocations(where: LocationWhereInput): BatchPayload!
   deleteManyCoordinateses(where: CoordinatesWhereInput): BatchPayload!
-  deleteManyBusinesses(where: BusinessWhereInput): BatchPayload!
   deleteManyCategorieses(where: CategoriesWhereInput): BatchPayload!
 }
 
@@ -1611,24 +1438,22 @@ type PageInfo {
 
 type Query {
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
-  businesseses(where: BusinessesWhereInput, orderBy: BusinessesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Businesses]!
+  businesses(where: BusinessWhereInput, orderBy: BusinessOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Business]!
   lovings(where: LovingWhereInput, orderBy: LovingOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Loving]!
   watchings(where: WatchingWhereInput, orderBy: WatchingOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Watching]!
   locations(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Location]!
   coordinateses(where: CoordinatesWhereInput, orderBy: CoordinatesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Coordinates]!
-  businesses(where: BusinessWhereInput, orderBy: BusinessOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Business]!
   categorieses(where: CategoriesWhereInput, orderBy: CategoriesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Categories]!
   user(where: UserWhereUniqueInput!): User
+  business(where: BusinessWhereUniqueInput!): Business
   loving(where: LovingWhereUniqueInput!): Loving
   watching(where: WatchingWhereUniqueInput!): Watching
-  business(where: BusinessWhereUniqueInput!): Business
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
-  businessesesConnection(where: BusinessesWhereInput, orderBy: BusinessesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BusinessesConnection!
+  businessesConnection(where: BusinessWhereInput, orderBy: BusinessOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BusinessConnection!
   lovingsConnection(where: LovingWhereInput, orderBy: LovingOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LovingConnection!
   watchingsConnection(where: WatchingWhereInput, orderBy: WatchingOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): WatchingConnection!
   locationsConnection(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LocationConnection!
   coordinatesesConnection(where: CoordinatesWhereInput, orderBy: CoordinatesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CoordinatesConnection!
-  businessesConnection(where: BusinessWhereInput, orderBy: BusinessOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BusinessConnection!
   categoriesesConnection(where: CategoriesWhereInput, orderBy: CategoriesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CategoriesConnection!
 
   """Fetches an object given its ID"""
@@ -1640,12 +1465,11 @@ type Query {
 
 type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
-  businesses(where: BusinessesSubscriptionWhereInput): BusinessesSubscriptionPayload
+  business(where: BusinessSubscriptionWhereInput): BusinessSubscriptionPayload
   loving(where: LovingSubscriptionWhereInput): LovingSubscriptionPayload
   watching(where: WatchingSubscriptionWhereInput): WatchingSubscriptionPayload
   location(where: LocationSubscriptionWhereInput): LocationSubscriptionPayload
   coordinates(where: CoordinatesSubscriptionWhereInput): CoordinatesSubscriptionPayload
-  business(where: BusinessSubscriptionWhereInput): BusinessSubscriptionPayload
   categories(where: CategoriesSubscriptionWhereInput): CategoriesSubscriptionPayload
 }
 
