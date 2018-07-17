@@ -43,11 +43,11 @@ type Categories {
 type Loving {
   id: ID! @unique
   business: Business!
-  lover: User!
+  user: User!
 }
 
 type Watching {
   id: ID! @unique
   business: Business!
-  watcher: User!
+  user: User!
 }
