@@ -11,26 +11,53 @@ const Query = {
       }
     }, info)
   },
-  search(parent, {
-    term,
-    location,
-    limit
-  }, context, info) {
-    return context.ylp.query.search({
-        term,
-        location,
-        limit
-      },
-      `{total business {id name price photos location {address1 city state country} coordinates{latitude longitude} categories{title}}}
-    `)
-  },
-  business(parent, {
+  async business(parent, {
     id
   }, context, info) {
-    return context.ylp.query.business({
-        id
+    const queriedBusiness = await context.db.query.business({
+        where: {
+          id
+        }
       },
-      `{id name price photos location{address1 city state country} coordinates{latitude longitude} categories{title}}`)
+      info)
+    if (queriedBusiness) {
+      return queriedBusiness
+    }
+
+    throw new Error(`Couldn't find business id: ${id}`)
+  },
+  async businesses(parent, args, context, info) {
+    const queriedBusinesses = await context.db.query.businesses({
+
+    }, info)
+
+    if (queriedBusinesses) {
+      return queriedBusinesses
+    }
+
+    throw new Error(`No businesses have been added`)
+  },
+  async lovedSharedByUser(parent, {
+    userId
+  }, context, info) {
+    return await context.db.query.lovings({
+      where: {
+        user: {
+          id: userId
+        }
+      }
+    }, info)
+  },
+  async watchedSharedByUser(parent, {
+    userId
+  }, context, info) {
+    return await context.db.query.watchings({
+      where: {
+        user: {
+          id: userId
+        }
+      }
+    }, info)
   }
 }
 

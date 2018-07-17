@@ -1,14 +1,19 @@
-# import User, Business, Businesses, Location, Coordinates, Categories, Loving, Watching from "./generated/prisma.graphql"
+# import User, Business, Location, Coordinates, Categories, Loving, Watching from "./generated/prisma.graphql"
 
 type Query {
   me: User
-  search(term: String!, location: String!, limit: Int = 5): Businesses
-  business(id: String!): Business!
+  business(id: String!): Business! #Resto Api
+  businesses: [Business!]! #Resto Api
+  lovedSharedByUser(id: String!): [Loving!]!
+  watchedSharedByUser(id: String!): [Watching!]!
+  searchFromYelp(term: String!, location: String!, limit: Int = 5): Businesses # Yelp Api
+  businessFromYelp(id: String!): Business! # Yelp Api
 }
 
 type Mutation {
   signup(email: String!, password: String!, name: String!): AuthPayload!
   login(email: String!, password: String!): AuthPayload!
+  signout: SuccessMessage
   createBusiness(
     yelpId: String!
     name: String!
@@ -23,7 +28,7 @@ type Mutation {
     cat_title: String
   ): Business!
   updateBusiness(
-    placeId: ID!
+    id: ID!
     yelpId: String
     name: String
     price: String
@@ -37,6 +42,9 @@ type Mutation {
     cat_title: String
   ): Business!
   addLoveToBusiness(placeId: ID!): Loving!
+  removeLoveToBusiness(placeId: ID!): Loving!
+  addWatchToBusiness(placeId: ID!): Watching!
+  removeWatchToBusiness(placeId: ID!): Watching!
 }
 
 type AuthPayload {
@@ -50,4 +58,13 @@ type User {
   name: String!
   loving: [Loving!]!
   watching: [Watching!]!
+}
+
+type Businesses {
+  business: [Business!]!
+  total: Int
+}
+
+type SuccessMessage {
+  message: String
 }

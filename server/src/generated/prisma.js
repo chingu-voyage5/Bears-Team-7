@@ -6,10 +6,6 @@ type AggregateBusiness {
   count: Int!
 }
 
-type AggregateBusinesses {
-  count: Int!
-}
-
 type AggregateCategories {
   count: Int!
 }
@@ -87,11 +83,6 @@ input BusinessCreateInput {
   lovers: LovingCreateManyWithoutBusinessInput
 }
 
-input BusinessCreateManyInput {
-  create: [BusinessCreateInput!]
-  connect: [BusinessWhereUniqueInput!]
-}
-
 input BusinessCreateOneWithoutLoversInput {
   create: BusinessCreateWithoutLoversInput
   connect: BusinessWhereUniqueInput
@@ -140,151 +131,6 @@ type BusinessEdge {
   A cursor for use in pagination.
   """
   cursor: String!
-}
-
-type Businesses {
-  business(where: BusinessWhereInput, orderBy: BusinessOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Business!]
-  total: Int
-}
-
-"""
-A connection to a list of items.
-"""
-type BusinessesConnection {
-  """
-  Information to aid in pagination.
-  """
-  pageInfo: PageInfo!
-  """
-  A list of edges.
-  """
-  edges: [BusinessesEdge]!
-  aggregate: AggregateBusinesses!
-}
-
-input BusinessesCreateInput {
-  total: Int
-  business: BusinessCreateManyInput
-}
-
-"""
-An edge in a connection.
-"""
-type BusinessesEdge {
-  """
-  The item at the end of the edge.
-  """
-  node: Businesses!
-  """
-  A cursor for use in pagination.
-  """
-  cursor: String!
-}
-
-enum BusinessesOrderByInput {
-  total_ASC
-  total_DESC
-  id_ASC
-  id_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
-}
-
-type BusinessesPreviousValues {
-  total: Int
-}
-
-type BusinessesSubscriptionPayload {
-  mutation: MutationType!
-  node: Businesses
-  updatedFields: [String!]
-  previousValues: BusinessesPreviousValues
-}
-
-input BusinessesSubscriptionWhereInput {
-  """
-  Logical AND on all given filters.
-  """
-  AND: [BusinessesSubscriptionWhereInput!]
-  """
-  Logical OR on all given filters.
-  """
-  OR: [BusinessesSubscriptionWhereInput!]
-  """
-  Logical NOT on all given filters combined by AND.
-  """
-  NOT: [BusinessesSubscriptionWhereInput!]
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
-  mutation_in: [MutationType!]
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
-  updatedFields_contains: String
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
-  updatedFields_contains_every: [String!]
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
-  updatedFields_contains_some: [String!]
-  node: BusinessesWhereInput
-}
-
-input BusinessesUpdateInput {
-  total: Int
-  business: BusinessUpdateManyInput
-}
-
-input BusinessesWhereInput {
-  """
-  Logical AND on all given filters.
-  """
-  AND: [BusinessesWhereInput!]
-  """
-  Logical OR on all given filters.
-  """
-  OR: [BusinessesWhereInput!]
-  """
-  Logical NOT on all given filters combined by AND.
-  """
-  NOT: [BusinessesWhereInput!]
-  total: Int
-  """
-  All values that are not equal to given value.
-  """
-  total_not: Int
-  """
-  All values that are contained in given list.
-  """
-  total_in: [Int!]
-  """
-  All values that are not contained in given list.
-  """
-  total_not_in: [Int!]
-  """
-  All values less than the given value.
-  """
-  total_lt: Int
-  """
-  All values less than or equal the given value.
-  """
-  total_lte: Int
-  """
-  All values greater than the given value.
-  """
-  total_gt: Int
-  """
-  All values greater than or equal the given value.
-  """
-  total_gte: Int
-  business_every: BusinessWhereInput
-  business_some: BusinessWhereInput
-  business_none: BusinessWhereInput
 }
 
 enum BusinessOrderByInput {
@@ -359,20 +205,6 @@ input BusinessSubscriptionWhereInput {
   node: BusinessWhereInput
 }
 
-input BusinessUpdateDataInput {
-  name: String
-  yelpId: String
-  price: String
-  photos: String
-  isLoved: Boolean
-  isWatched: Boolean
-  location: LocationUpdateOneInput
-  coordinates: CoordinatesUpdateOneInput
-  categories: CategoriesUpdateManyInput
-  watchers: WatchingUpdateManyWithoutBusinessInput
-  lovers: LovingUpdateManyWithoutBusinessInput
-}
-
 input BusinessUpdateInput {
   name: String
   yelpId: String
@@ -385,15 +217,6 @@ input BusinessUpdateInput {
   categories: CategoriesUpdateManyInput
   watchers: WatchingUpdateManyWithoutBusinessInput
   lovers: LovingUpdateManyWithoutBusinessInput
-}
-
-input BusinessUpdateManyInput {
-  create: [BusinessCreateInput!]
-  connect: [BusinessWhereUniqueInput!]
-  disconnect: [BusinessWhereUniqueInput!]
-  delete: [BusinessWhereUniqueInput!]
-  update: [BusinessUpdateWithWhereUniqueNestedInput!]
-  upsert: [BusinessUpsertWithWhereUniqueNestedInput!]
 }
 
 input BusinessUpdateOneWithoutLoversInput {
@@ -438,11 +261,6 @@ input BusinessUpdateWithoutWatchersDataInput {
   lovers: LovingUpdateManyWithoutBusinessInput
 }
 
-input BusinessUpdateWithWhereUniqueNestedInput {
-  where: BusinessWhereUniqueInput!
-  data: BusinessUpdateDataInput!
-}
-
 input BusinessUpsertWithoutLoversInput {
   update: BusinessUpdateWithoutLoversDataInput!
   create: BusinessCreateWithoutLoversInput!
@@ -451,12 +269,6 @@ input BusinessUpsertWithoutLoversInput {
 input BusinessUpsertWithoutWatchersInput {
   update: BusinessUpdateWithoutWatchersDataInput!
   create: BusinessCreateWithoutWatchersInput!
-}
-
-input BusinessUpsertWithWhereUniqueNestedInput {
-  where: BusinessWhereUniqueInput!
-  update: BusinessUpdateDataInput!
-  create: BusinessCreateInput!
 }
 
 input BusinessWhereInput {
@@ -816,9 +628,6 @@ input BusinessWhereInput {
   lovers_every: LovingWhereInput
   lovers_some: LovingWhereInput
   lovers_none: LovingWhereInput
-  _MagicalBackRelation_BusinessToBusinesses_every: BusinessesWhereInput
-  _MagicalBackRelation_BusinessToBusinesses_some: BusinessesWhereInput
-  _MagicalBackRelation_BusinessToBusinesses_none: BusinessesWhereInput
 }
 
 input BusinessWhereUniqueInput {
@@ -1576,7 +1385,7 @@ scalar Long
 type Loving implements Node {
   id: ID!
   business(where: BusinessWhereInput): Business!
-  lover(where: UserWhereInput): User!
+  user(where: UserWhereInput): User!
 }
 
 """
@@ -1596,7 +1405,7 @@ type LovingConnection {
 
 input LovingCreateInput {
   business: BusinessCreateOneWithoutLoversInput!
-  lover: UserCreateOneWithoutLovingInput!
+  user: UserCreateOneWithoutLovingInput!
 }
 
 input LovingCreateManyWithoutBusinessInput {
@@ -1604,16 +1413,16 @@ input LovingCreateManyWithoutBusinessInput {
   connect: [LovingWhereUniqueInput!]
 }
 
-input LovingCreateManyWithoutLoverInput {
-  create: [LovingCreateWithoutLoverInput!]
+input LovingCreateManyWithoutUserInput {
+  create: [LovingCreateWithoutUserInput!]
   connect: [LovingWhereUniqueInput!]
 }
 
 input LovingCreateWithoutBusinessInput {
-  lover: UserCreateOneWithoutLovingInput!
+  user: UserCreateOneWithoutLovingInput!
 }
 
-input LovingCreateWithoutLoverInput {
+input LovingCreateWithoutUserInput {
   business: BusinessCreateOneWithoutLoversInput!
 }
 
@@ -1685,7 +1494,7 @@ input LovingSubscriptionWhereInput {
 
 input LovingUpdateInput {
   business: BusinessUpdateOneWithoutLoversInput
-  lover: UserUpdateOneWithoutLovingInput
+  user: UserUpdateOneWithoutLovingInput
 }
 
 input LovingUpdateManyWithoutBusinessInput {
@@ -1697,20 +1506,20 @@ input LovingUpdateManyWithoutBusinessInput {
   upsert: [LovingUpsertWithWhereUniqueWithoutBusinessInput!]
 }
 
-input LovingUpdateManyWithoutLoverInput {
-  create: [LovingCreateWithoutLoverInput!]
+input LovingUpdateManyWithoutUserInput {
+  create: [LovingCreateWithoutUserInput!]
   connect: [LovingWhereUniqueInput!]
   disconnect: [LovingWhereUniqueInput!]
   delete: [LovingWhereUniqueInput!]
-  update: [LovingUpdateWithWhereUniqueWithoutLoverInput!]
-  upsert: [LovingUpsertWithWhereUniqueWithoutLoverInput!]
+  update: [LovingUpdateWithWhereUniqueWithoutUserInput!]
+  upsert: [LovingUpsertWithWhereUniqueWithoutUserInput!]
 }
 
 input LovingUpdateWithoutBusinessDataInput {
-  lover: UserUpdateOneWithoutLovingInput
+  user: UserUpdateOneWithoutLovingInput
 }
 
-input LovingUpdateWithoutLoverDataInput {
+input LovingUpdateWithoutUserDataInput {
   business: BusinessUpdateOneWithoutLoversInput
 }
 
@@ -1719,9 +1528,9 @@ input LovingUpdateWithWhereUniqueWithoutBusinessInput {
   data: LovingUpdateWithoutBusinessDataInput!
 }
 
-input LovingUpdateWithWhereUniqueWithoutLoverInput {
+input LovingUpdateWithWhereUniqueWithoutUserInput {
   where: LovingWhereUniqueInput!
-  data: LovingUpdateWithoutLoverDataInput!
+  data: LovingUpdateWithoutUserDataInput!
 }
 
 input LovingUpsertWithWhereUniqueWithoutBusinessInput {
@@ -1730,10 +1539,10 @@ input LovingUpsertWithWhereUniqueWithoutBusinessInput {
   create: LovingCreateWithoutBusinessInput!
 }
 
-input LovingUpsertWithWhereUniqueWithoutLoverInput {
+input LovingUpsertWithWhereUniqueWithoutUserInput {
   where: LovingWhereUniqueInput!
-  update: LovingUpdateWithoutLoverDataInput!
-  create: LovingCreateWithoutLoverInput!
+  update: LovingUpdateWithoutUserDataInput!
+  create: LovingCreateWithoutUserInput!
 }
 
 input LovingWhereInput {
@@ -1803,7 +1612,7 @@ input LovingWhereInput {
   """
   id_not_ends_with: ID
   business: BusinessWhereInput
-  lover: UserWhereInput
+  user: UserWhereInput
 }
 
 input LovingWhereUniqueInput {
@@ -1876,8 +1685,8 @@ input UserCreateInput {
   email: String!
   password: String!
   name: String!
-  watching: WatchingCreateManyWithoutWatcherInput
-  loving: LovingCreateManyWithoutLoverInput
+  watching: WatchingCreateManyWithoutUserInput
+  loving: LovingCreateManyWithoutUserInput
 }
 
 input UserCreateOneWithoutLovingInput {
@@ -1894,14 +1703,14 @@ input UserCreateWithoutLovingInput {
   email: String!
   password: String!
   name: String!
-  watching: WatchingCreateManyWithoutWatcherInput
+  watching: WatchingCreateManyWithoutUserInput
 }
 
 input UserCreateWithoutWatchingInput {
   email: String!
   password: String!
   name: String!
-  loving: LovingCreateManyWithoutLoverInput
+  loving: LovingCreateManyWithoutUserInput
 }
 
 """
@@ -1983,8 +1792,8 @@ input UserUpdateInput {
   email: String
   password: String
   name: String
-  watching: WatchingUpdateManyWithoutWatcherInput
-  loving: LovingUpdateManyWithoutLoverInput
+  watching: WatchingUpdateManyWithoutUserInput
+  loving: LovingUpdateManyWithoutUserInput
 }
 
 input UserUpdateOneWithoutLovingInput {
@@ -2007,14 +1816,14 @@ input UserUpdateWithoutLovingDataInput {
   email: String
   password: String
   name: String
-  watching: WatchingUpdateManyWithoutWatcherInput
+  watching: WatchingUpdateManyWithoutUserInput
 }
 
 input UserUpdateWithoutWatchingDataInput {
   email: String
   password: String
   name: String
-  loving: LovingUpdateManyWithoutLoverInput
+  loving: LovingUpdateManyWithoutUserInput
 }
 
 input UserUpsertWithoutLovingInput {
@@ -2268,7 +2077,7 @@ input UserWhereUniqueInput {
 type Watching implements Node {
   id: ID!
   business(where: BusinessWhereInput): Business!
-  watcher(where: UserWhereInput): User!
+  user(where: UserWhereInput): User!
 }
 
 """
@@ -2288,7 +2097,7 @@ type WatchingConnection {
 
 input WatchingCreateInput {
   business: BusinessCreateOneWithoutWatchersInput!
-  watcher: UserCreateOneWithoutWatchingInput!
+  user: UserCreateOneWithoutWatchingInput!
 }
 
 input WatchingCreateManyWithoutBusinessInput {
@@ -2296,16 +2105,16 @@ input WatchingCreateManyWithoutBusinessInput {
   connect: [WatchingWhereUniqueInput!]
 }
 
-input WatchingCreateManyWithoutWatcherInput {
-  create: [WatchingCreateWithoutWatcherInput!]
+input WatchingCreateManyWithoutUserInput {
+  create: [WatchingCreateWithoutUserInput!]
   connect: [WatchingWhereUniqueInput!]
 }
 
 input WatchingCreateWithoutBusinessInput {
-  watcher: UserCreateOneWithoutWatchingInput!
+  user: UserCreateOneWithoutWatchingInput!
 }
 
-input WatchingCreateWithoutWatcherInput {
+input WatchingCreateWithoutUserInput {
   business: BusinessCreateOneWithoutWatchersInput!
 }
 
@@ -2377,7 +2186,7 @@ input WatchingSubscriptionWhereInput {
 
 input WatchingUpdateInput {
   business: BusinessUpdateOneWithoutWatchersInput
-  watcher: UserUpdateOneWithoutWatchingInput
+  user: UserUpdateOneWithoutWatchingInput
 }
 
 input WatchingUpdateManyWithoutBusinessInput {
@@ -2389,20 +2198,20 @@ input WatchingUpdateManyWithoutBusinessInput {
   upsert: [WatchingUpsertWithWhereUniqueWithoutBusinessInput!]
 }
 
-input WatchingUpdateManyWithoutWatcherInput {
-  create: [WatchingCreateWithoutWatcherInput!]
+input WatchingUpdateManyWithoutUserInput {
+  create: [WatchingCreateWithoutUserInput!]
   connect: [WatchingWhereUniqueInput!]
   disconnect: [WatchingWhereUniqueInput!]
   delete: [WatchingWhereUniqueInput!]
-  update: [WatchingUpdateWithWhereUniqueWithoutWatcherInput!]
-  upsert: [WatchingUpsertWithWhereUniqueWithoutWatcherInput!]
+  update: [WatchingUpdateWithWhereUniqueWithoutUserInput!]
+  upsert: [WatchingUpsertWithWhereUniqueWithoutUserInput!]
 }
 
 input WatchingUpdateWithoutBusinessDataInput {
-  watcher: UserUpdateOneWithoutWatchingInput
+  user: UserUpdateOneWithoutWatchingInput
 }
 
-input WatchingUpdateWithoutWatcherDataInput {
+input WatchingUpdateWithoutUserDataInput {
   business: BusinessUpdateOneWithoutWatchersInput
 }
 
@@ -2411,9 +2220,9 @@ input WatchingUpdateWithWhereUniqueWithoutBusinessInput {
   data: WatchingUpdateWithoutBusinessDataInput!
 }
 
-input WatchingUpdateWithWhereUniqueWithoutWatcherInput {
+input WatchingUpdateWithWhereUniqueWithoutUserInput {
   where: WatchingWhereUniqueInput!
-  data: WatchingUpdateWithoutWatcherDataInput!
+  data: WatchingUpdateWithoutUserDataInput!
 }
 
 input WatchingUpsertWithWhereUniqueWithoutBusinessInput {
@@ -2422,10 +2231,10 @@ input WatchingUpsertWithWhereUniqueWithoutBusinessInput {
   create: WatchingCreateWithoutBusinessInput!
 }
 
-input WatchingUpsertWithWhereUniqueWithoutWatcherInput {
+input WatchingUpsertWithWhereUniqueWithoutUserInput {
   where: WatchingWhereUniqueInput!
-  update: WatchingUpdateWithoutWatcherDataInput!
-  create: WatchingCreateWithoutWatcherInput!
+  update: WatchingUpdateWithoutUserDataInput!
+  create: WatchingCreateWithoutUserInput!
 }
 
 input WatchingWhereInput {
@@ -2495,7 +2304,7 @@ input WatchingWhereInput {
   """
   id_not_ends_with: ID
   business: BusinessWhereInput
-  watcher: UserWhereInput
+  user: UserWhereInput
 }
 
 input WatchingWhereUniqueInput {
@@ -2504,63 +2313,58 @@ input WatchingWhereUniqueInput {
 
 type Mutation {
   createUser(data: UserCreateInput!): User!
-  createBusinesses(data: BusinessesCreateInput!): Businesses!
+  createBusiness(data: BusinessCreateInput!): Business!
   createLoving(data: LovingCreateInput!): Loving!
   createWatching(data: WatchingCreateInput!): Watching!
   createLocation(data: LocationCreateInput!): Location!
   createCoordinates(data: CoordinatesCreateInput!): Coordinates!
-  createBusiness(data: BusinessCreateInput!): Business!
   createCategories(data: CategoriesCreateInput!): Categories!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateBusiness(data: BusinessUpdateInput!, where: BusinessWhereUniqueInput!): Business
   updateLoving(data: LovingUpdateInput!, where: LovingWhereUniqueInput!): Loving
   updateWatching(data: WatchingUpdateInput!, where: WatchingWhereUniqueInput!): Watching
-  updateBusiness(data: BusinessUpdateInput!, where: BusinessWhereUniqueInput!): Business
   deleteUser(where: UserWhereUniqueInput!): User
+  deleteBusiness(where: BusinessWhereUniqueInput!): Business
   deleteLoving(where: LovingWhereUniqueInput!): Loving
   deleteWatching(where: WatchingWhereUniqueInput!): Watching
-  deleteBusiness(where: BusinessWhereUniqueInput!): Business
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  upsertBusiness(where: BusinessWhereUniqueInput!, create: BusinessCreateInput!, update: BusinessUpdateInput!): Business!
   upsertLoving(where: LovingWhereUniqueInput!, create: LovingCreateInput!, update: LovingUpdateInput!): Loving!
   upsertWatching(where: WatchingWhereUniqueInput!, create: WatchingCreateInput!, update: WatchingUpdateInput!): Watching!
-  upsertBusiness(where: BusinessWhereUniqueInput!, create: BusinessCreateInput!, update: BusinessUpdateInput!): Business!
   updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
-  updateManyBusinesseses(data: BusinessesUpdateInput!, where: BusinessesWhereInput): BatchPayload!
+  updateManyBusinesses(data: BusinessUpdateInput!, where: BusinessWhereInput): BatchPayload!
   updateManyLovings(data: LovingUpdateInput!, where: LovingWhereInput): BatchPayload!
   updateManyWatchings(data: WatchingUpdateInput!, where: WatchingWhereInput): BatchPayload!
   updateManyLocations(data: LocationUpdateInput!, where: LocationWhereInput): BatchPayload!
   updateManyCoordinateses(data: CoordinatesUpdateInput!, where: CoordinatesWhereInput): BatchPayload!
-  updateManyBusinesses(data: BusinessUpdateInput!, where: BusinessWhereInput): BatchPayload!
   updateManyCategorieses(data: CategoriesUpdateInput!, where: CategoriesWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
-  deleteManyBusinesseses(where: BusinessesWhereInput): BatchPayload!
+  deleteManyBusinesses(where: BusinessWhereInput): BatchPayload!
   deleteManyLovings(where: LovingWhereInput): BatchPayload!
   deleteManyWatchings(where: WatchingWhereInput): BatchPayload!
   deleteManyLocations(where: LocationWhereInput): BatchPayload!
   deleteManyCoordinateses(where: CoordinatesWhereInput): BatchPayload!
-  deleteManyBusinesses(where: BusinessWhereInput): BatchPayload!
   deleteManyCategorieses(where: CategoriesWhereInput): BatchPayload!
 }
 
 type Query {
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
-  businesseses(where: BusinessesWhereInput, orderBy: BusinessesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Businesses]!
+  businesses(where: BusinessWhereInput, orderBy: BusinessOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Business]!
   lovings(where: LovingWhereInput, orderBy: LovingOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Loving]!
   watchings(where: WatchingWhereInput, orderBy: WatchingOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Watching]!
   locations(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Location]!
   coordinateses(where: CoordinatesWhereInput, orderBy: CoordinatesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Coordinates]!
-  businesses(where: BusinessWhereInput, orderBy: BusinessOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Business]!
   categorieses(where: CategoriesWhereInput, orderBy: CategoriesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Categories]!
   user(where: UserWhereUniqueInput!): User
+  business(where: BusinessWhereUniqueInput!): Business
   loving(where: LovingWhereUniqueInput!): Loving
   watching(where: WatchingWhereUniqueInput!): Watching
-  business(where: BusinessWhereUniqueInput!): Business
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
-  businessesesConnection(where: BusinessesWhereInput, orderBy: BusinessesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BusinessesConnection!
+  businessesConnection(where: BusinessWhereInput, orderBy: BusinessOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BusinessConnection!
   lovingsConnection(where: LovingWhereInput, orderBy: LovingOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LovingConnection!
   watchingsConnection(where: WatchingWhereInput, orderBy: WatchingOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): WatchingConnection!
   locationsConnection(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LocationConnection!
   coordinatesesConnection(where: CoordinatesWhereInput, orderBy: CoordinatesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CoordinatesConnection!
-  businessesConnection(where: BusinessWhereInput, orderBy: BusinessOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BusinessConnection!
   categoriesesConnection(where: CategoriesWhereInput, orderBy: CategoriesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CategoriesConnection!
   """
   Fetches an object given its ID
@@ -2573,12 +2377,11 @@ type Query {
 
 type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
-  businesses(where: BusinessesSubscriptionWhereInput): BusinessesSubscriptionPayload
+  business(where: BusinessSubscriptionWhereInput): BusinessSubscriptionPayload
   loving(where: LovingSubscriptionWhereInput): LovingSubscriptionPayload
   watching(where: WatchingSubscriptionWhereInput): WatchingSubscriptionPayload
   location(where: LocationSubscriptionWhereInput): LocationSubscriptionPayload
   coordinates(where: CoordinatesSubscriptionWhereInput): CoordinatesSubscriptionPayload
-  business(where: BusinessSubscriptionWhereInput): BusinessSubscriptionPayload
   categories(where: CategoriesSubscriptionWhereInput): CategoriesSubscriptionPayload
 }
 `
@@ -2593,8 +2396,8 @@ module.exports.Prisma = class Binding extends Prisma {
       User(where) {
         return super.existsDelegate('query', 'users', { where }, {}, '{ id }')
       },
-      Businesses(where) {
-        return super.existsDelegate('query', 'businesseses', { where }, {}, '{ id }')
+      Business(where) {
+        return super.existsDelegate('query', 'businesses', { where }, {}, '{ id }')
       },
       Loving(where) {
         return super.existsDelegate('query', 'lovings', { where }, {}, '{ id }')
@@ -2608,9 +2411,6 @@ module.exports.Prisma = class Binding extends Prisma {
       Coordinates(where) {
         return super.existsDelegate('query', 'coordinateses', { where }, {}, '{ id }')
       },
-      Business(where) {
-        return super.existsDelegate('query', 'businesses', { where }, {}, '{ id }')
-      },
       Categories(where) {
         return super.existsDelegate('query', 'categorieses', { where }, {}, '{ id }')
       }
@@ -2620,8 +2420,8 @@ module.exports.Prisma = class Binding extends Prisma {
       users(args, info) { 
         return self.delegate('query', 'users', args, {}, info)
       },
-      businesseses(args, info) { 
-        return self.delegate('query', 'businesseses', args, {}, info)
+      businesses(args, info) { 
+        return self.delegate('query', 'businesses', args, {}, info)
       },
       lovings(args, info) { 
         return self.delegate('query', 'lovings', args, {}, info)
@@ -2635,14 +2435,14 @@ module.exports.Prisma = class Binding extends Prisma {
       coordinateses(args, info) { 
         return self.delegate('query', 'coordinateses', args, {}, info)
       },
-      businesses(args, info) { 
-        return self.delegate('query', 'businesses', args, {}, info)
-      },
       categorieses(args, info) { 
         return self.delegate('query', 'categorieses', args, {}, info)
       },
       user(args, info) { 
         return self.delegate('query', 'user', args, {}, info)
+      },
+      business(args, info) { 
+        return self.delegate('query', 'business', args, {}, info)
       },
       loving(args, info) { 
         return self.delegate('query', 'loving', args, {}, info)
@@ -2650,14 +2450,11 @@ module.exports.Prisma = class Binding extends Prisma {
       watching(args, info) { 
         return self.delegate('query', 'watching', args, {}, info)
       },
-      business(args, info) { 
-        return self.delegate('query', 'business', args, {}, info)
-      },
       usersConnection(args, info) { 
         return self.delegate('query', 'usersConnection', args, {}, info)
       },
-      businessesesConnection(args, info) { 
-        return self.delegate('query', 'businessesesConnection', args, {}, info)
+      businessesConnection(args, info) { 
+        return self.delegate('query', 'businessesConnection', args, {}, info)
       },
       lovingsConnection(args, info) { 
         return self.delegate('query', 'lovingsConnection', args, {}, info)
@@ -2671,9 +2468,6 @@ module.exports.Prisma = class Binding extends Prisma {
       coordinatesesConnection(args, info) { 
         return self.delegate('query', 'coordinatesesConnection', args, {}, info)
       },
-      businessesConnection(args, info) { 
-        return self.delegate('query', 'businessesConnection', args, {}, info)
-      },
       categoriesesConnection(args, info) { 
         return self.delegate('query', 'categoriesesConnection', args, {}, info)
       },
@@ -2686,8 +2480,8 @@ module.exports.Prisma = class Binding extends Prisma {
       createUser(args, info) { 
         return self.delegate('mutation', 'createUser', args, {}, info)
       },
-      createBusinesses(args, info) { 
-        return self.delegate('mutation', 'createBusinesses', args, {}, info)
+      createBusiness(args, info) { 
+        return self.delegate('mutation', 'createBusiness', args, {}, info)
       },
       createLoving(args, info) { 
         return self.delegate('mutation', 'createLoving', args, {}, info)
@@ -2701,14 +2495,14 @@ module.exports.Prisma = class Binding extends Prisma {
       createCoordinates(args, info) { 
         return self.delegate('mutation', 'createCoordinates', args, {}, info)
       },
-      createBusiness(args, info) { 
-        return self.delegate('mutation', 'createBusiness', args, {}, info)
-      },
       createCategories(args, info) { 
         return self.delegate('mutation', 'createCategories', args, {}, info)
       },
       updateUser(args, info) { 
         return self.delegate('mutation', 'updateUser', args, {}, info)
+      },
+      updateBusiness(args, info) { 
+        return self.delegate('mutation', 'updateBusiness', args, {}, info)
       },
       updateLoving(args, info) { 
         return self.delegate('mutation', 'updateLoving', args, {}, info)
@@ -2716,11 +2510,11 @@ module.exports.Prisma = class Binding extends Prisma {
       updateWatching(args, info) { 
         return self.delegate('mutation', 'updateWatching', args, {}, info)
       },
-      updateBusiness(args, info) { 
-        return self.delegate('mutation', 'updateBusiness', args, {}, info)
-      },
       deleteUser(args, info) { 
         return self.delegate('mutation', 'deleteUser', args, {}, info)
+      },
+      deleteBusiness(args, info) { 
+        return self.delegate('mutation', 'deleteBusiness', args, {}, info)
       },
       deleteLoving(args, info) { 
         return self.delegate('mutation', 'deleteLoving', args, {}, info)
@@ -2728,11 +2522,11 @@ module.exports.Prisma = class Binding extends Prisma {
       deleteWatching(args, info) { 
         return self.delegate('mutation', 'deleteWatching', args, {}, info)
       },
-      deleteBusiness(args, info) { 
-        return self.delegate('mutation', 'deleteBusiness', args, {}, info)
-      },
       upsertUser(args, info) { 
         return self.delegate('mutation', 'upsertUser', args, {}, info)
+      },
+      upsertBusiness(args, info) { 
+        return self.delegate('mutation', 'upsertBusiness', args, {}, info)
       },
       upsertLoving(args, info) { 
         return self.delegate('mutation', 'upsertLoving', args, {}, info)
@@ -2740,14 +2534,11 @@ module.exports.Prisma = class Binding extends Prisma {
       upsertWatching(args, info) { 
         return self.delegate('mutation', 'upsertWatching', args, {}, info)
       },
-      upsertBusiness(args, info) { 
-        return self.delegate('mutation', 'upsertBusiness', args, {}, info)
-      },
       updateManyUsers(args, info) { 
         return self.delegate('mutation', 'updateManyUsers', args, {}, info)
       },
-      updateManyBusinesseses(args, info) { 
-        return self.delegate('mutation', 'updateManyBusinesseses', args, {}, info)
+      updateManyBusinesses(args, info) { 
+        return self.delegate('mutation', 'updateManyBusinesses', args, {}, info)
       },
       updateManyLovings(args, info) { 
         return self.delegate('mutation', 'updateManyLovings', args, {}, info)
@@ -2761,17 +2552,14 @@ module.exports.Prisma = class Binding extends Prisma {
       updateManyCoordinateses(args, info) { 
         return self.delegate('mutation', 'updateManyCoordinateses', args, {}, info)
       },
-      updateManyBusinesses(args, info) { 
-        return self.delegate('mutation', 'updateManyBusinesses', args, {}, info)
-      },
       updateManyCategorieses(args, info) { 
         return self.delegate('mutation', 'updateManyCategorieses', args, {}, info)
       },
       deleteManyUsers(args, info) { 
         return self.delegate('mutation', 'deleteManyUsers', args, {}, info)
       },
-      deleteManyBusinesseses(args, info) { 
-        return self.delegate('mutation', 'deleteManyBusinesseses', args, {}, info)
+      deleteManyBusinesses(args, info) { 
+        return self.delegate('mutation', 'deleteManyBusinesses', args, {}, info)
       },
       deleteManyLovings(args, info) { 
         return self.delegate('mutation', 'deleteManyLovings', args, {}, info)
@@ -2785,9 +2573,6 @@ module.exports.Prisma = class Binding extends Prisma {
       deleteManyCoordinateses(args, info) { 
         return self.delegate('mutation', 'deleteManyCoordinateses', args, {}, info)
       },
-      deleteManyBusinesses(args, info) { 
-        return self.delegate('mutation', 'deleteManyBusinesses', args, {}, info)
-      },
       deleteManyCategorieses(args, info) { 
         return self.delegate('mutation', 'deleteManyCategorieses', args, {}, info)
       }
@@ -2797,8 +2582,8 @@ module.exports.Prisma = class Binding extends Prisma {
       user(args, infoOrQuery) { 
         return self.delegateSubscription('user', args, {}, infoOrQuery)
       },
-      businesses(args, infoOrQuery) { 
-        return self.delegateSubscription('businesses', args, {}, infoOrQuery)
+      business(args, infoOrQuery) { 
+        return self.delegateSubscription('business', args, {}, infoOrQuery)
       },
       loving(args, infoOrQuery) { 
         return self.delegateSubscription('loving', args, {}, infoOrQuery)
@@ -2811,9 +2596,6 @@ module.exports.Prisma = class Binding extends Prisma {
       },
       coordinates(args, infoOrQuery) { 
         return self.delegateSubscription('coordinates', args, {}, infoOrQuery)
-      },
-      business(args, infoOrQuery) { 
-        return self.delegateSubscription('business', args, {}, infoOrQuery)
       },
       categories(args, infoOrQuery) { 
         return self.delegateSubscription('categories', args, {}, infoOrQuery)
