@@ -3,6 +3,9 @@
 type Query {
   me: User
   business(id: String!): Business! #Resto Api
+  businesses: [Business!]! #Resto Api
+  lovedSharedByUser(id: String!): [Loving!]!
+  watchedSharedByUser(id: String!): [Watching!]!
   searchFromYelp(term: String!, location: String!, limit: Int = 5): Businesses # Yelp Api
   businessFromYelp(id: String!): Business! # Yelp Api
 }
@@ -40,6 +43,8 @@ type Mutation {
   ): Business!
   addLoveToBusiness(placeId: ID!): Loving!
   removeLoveToBusiness(placeId: ID!): Loving!
+  addWatchToBusiness(placeId: ID!): Watching!
+  removeWatchToBusiness(placeId: ID!): Watching!
 }
 
 type AuthPayload {
