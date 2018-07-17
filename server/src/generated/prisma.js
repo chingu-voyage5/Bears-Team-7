@@ -1385,7 +1385,7 @@ scalar Long
 type Loving implements Node {
   id: ID!
   business(where: BusinessWhereInput): Business!
-  lover(where: UserWhereInput): User!
+  user(where: UserWhereInput): User!
 }
 
 """
@@ -1405,7 +1405,7 @@ type LovingConnection {
 
 input LovingCreateInput {
   business: BusinessCreateOneWithoutLoversInput!
-  lover: UserCreateOneWithoutLovingInput!
+  user: UserCreateOneWithoutLovingInput!
 }
 
 input LovingCreateManyWithoutBusinessInput {
@@ -1413,16 +1413,16 @@ input LovingCreateManyWithoutBusinessInput {
   connect: [LovingWhereUniqueInput!]
 }
 
-input LovingCreateManyWithoutLoverInput {
-  create: [LovingCreateWithoutLoverInput!]
+input LovingCreateManyWithoutUserInput {
+  create: [LovingCreateWithoutUserInput!]
   connect: [LovingWhereUniqueInput!]
 }
 
 input LovingCreateWithoutBusinessInput {
-  lover: UserCreateOneWithoutLovingInput!
+  user: UserCreateOneWithoutLovingInput!
 }
 
-input LovingCreateWithoutLoverInput {
+input LovingCreateWithoutUserInput {
   business: BusinessCreateOneWithoutLoversInput!
 }
 
@@ -1494,7 +1494,7 @@ input LovingSubscriptionWhereInput {
 
 input LovingUpdateInput {
   business: BusinessUpdateOneWithoutLoversInput
-  lover: UserUpdateOneWithoutLovingInput
+  user: UserUpdateOneWithoutLovingInput
 }
 
 input LovingUpdateManyWithoutBusinessInput {
@@ -1506,20 +1506,20 @@ input LovingUpdateManyWithoutBusinessInput {
   upsert: [LovingUpsertWithWhereUniqueWithoutBusinessInput!]
 }
 
-input LovingUpdateManyWithoutLoverInput {
-  create: [LovingCreateWithoutLoverInput!]
+input LovingUpdateManyWithoutUserInput {
+  create: [LovingCreateWithoutUserInput!]
   connect: [LovingWhereUniqueInput!]
   disconnect: [LovingWhereUniqueInput!]
   delete: [LovingWhereUniqueInput!]
-  update: [LovingUpdateWithWhereUniqueWithoutLoverInput!]
-  upsert: [LovingUpsertWithWhereUniqueWithoutLoverInput!]
+  update: [LovingUpdateWithWhereUniqueWithoutUserInput!]
+  upsert: [LovingUpsertWithWhereUniqueWithoutUserInput!]
 }
 
 input LovingUpdateWithoutBusinessDataInput {
-  lover: UserUpdateOneWithoutLovingInput
+  user: UserUpdateOneWithoutLovingInput
 }
 
-input LovingUpdateWithoutLoverDataInput {
+input LovingUpdateWithoutUserDataInput {
   business: BusinessUpdateOneWithoutLoversInput
 }
 
@@ -1528,9 +1528,9 @@ input LovingUpdateWithWhereUniqueWithoutBusinessInput {
   data: LovingUpdateWithoutBusinessDataInput!
 }
 
-input LovingUpdateWithWhereUniqueWithoutLoverInput {
+input LovingUpdateWithWhereUniqueWithoutUserInput {
   where: LovingWhereUniqueInput!
-  data: LovingUpdateWithoutLoverDataInput!
+  data: LovingUpdateWithoutUserDataInput!
 }
 
 input LovingUpsertWithWhereUniqueWithoutBusinessInput {
@@ -1539,10 +1539,10 @@ input LovingUpsertWithWhereUniqueWithoutBusinessInput {
   create: LovingCreateWithoutBusinessInput!
 }
 
-input LovingUpsertWithWhereUniqueWithoutLoverInput {
+input LovingUpsertWithWhereUniqueWithoutUserInput {
   where: LovingWhereUniqueInput!
-  update: LovingUpdateWithoutLoverDataInput!
-  create: LovingCreateWithoutLoverInput!
+  update: LovingUpdateWithoutUserDataInput!
+  create: LovingCreateWithoutUserInput!
 }
 
 input LovingWhereInput {
@@ -1612,7 +1612,7 @@ input LovingWhereInput {
   """
   id_not_ends_with: ID
   business: BusinessWhereInput
-  lover: UserWhereInput
+  user: UserWhereInput
 }
 
 input LovingWhereUniqueInput {
@@ -1685,8 +1685,8 @@ input UserCreateInput {
   email: String!
   password: String!
   name: String!
-  watching: WatchingCreateManyWithoutWatcherInput
-  loving: LovingCreateManyWithoutLoverInput
+  watching: WatchingCreateManyWithoutUserInput
+  loving: LovingCreateManyWithoutUserInput
 }
 
 input UserCreateOneWithoutLovingInput {
@@ -1703,14 +1703,14 @@ input UserCreateWithoutLovingInput {
   email: String!
   password: String!
   name: String!
-  watching: WatchingCreateManyWithoutWatcherInput
+  watching: WatchingCreateManyWithoutUserInput
 }
 
 input UserCreateWithoutWatchingInput {
   email: String!
   password: String!
   name: String!
-  loving: LovingCreateManyWithoutLoverInput
+  loving: LovingCreateManyWithoutUserInput
 }
 
 """
@@ -1792,8 +1792,8 @@ input UserUpdateInput {
   email: String
   password: String
   name: String
-  watching: WatchingUpdateManyWithoutWatcherInput
-  loving: LovingUpdateManyWithoutLoverInput
+  watching: WatchingUpdateManyWithoutUserInput
+  loving: LovingUpdateManyWithoutUserInput
 }
 
 input UserUpdateOneWithoutLovingInput {
@@ -1816,14 +1816,14 @@ input UserUpdateWithoutLovingDataInput {
   email: String
   password: String
   name: String
-  watching: WatchingUpdateManyWithoutWatcherInput
+  watching: WatchingUpdateManyWithoutUserInput
 }
 
 input UserUpdateWithoutWatchingDataInput {
   email: String
   password: String
   name: String
-  loving: LovingUpdateManyWithoutLoverInput
+  loving: LovingUpdateManyWithoutUserInput
 }
 
 input UserUpsertWithoutLovingInput {
@@ -2077,7 +2077,7 @@ input UserWhereUniqueInput {
 type Watching implements Node {
   id: ID!
   business(where: BusinessWhereInput): Business!
-  watcher(where: UserWhereInput): User!
+  user(where: UserWhereInput): User!
 }
 
 """
@@ -2097,7 +2097,7 @@ type WatchingConnection {
 
 input WatchingCreateInput {
   business: BusinessCreateOneWithoutWatchersInput!
-  watcher: UserCreateOneWithoutWatchingInput!
+  user: UserCreateOneWithoutWatchingInput!
 }
 
 input WatchingCreateManyWithoutBusinessInput {
@@ -2105,16 +2105,16 @@ input WatchingCreateManyWithoutBusinessInput {
   connect: [WatchingWhereUniqueInput!]
 }
 
-input WatchingCreateManyWithoutWatcherInput {
-  create: [WatchingCreateWithoutWatcherInput!]
+input WatchingCreateManyWithoutUserInput {
+  create: [WatchingCreateWithoutUserInput!]
   connect: [WatchingWhereUniqueInput!]
 }
 
 input WatchingCreateWithoutBusinessInput {
-  watcher: UserCreateOneWithoutWatchingInput!
+  user: UserCreateOneWithoutWatchingInput!
 }
 
-input WatchingCreateWithoutWatcherInput {
+input WatchingCreateWithoutUserInput {
   business: BusinessCreateOneWithoutWatchersInput!
 }
 
@@ -2186,7 +2186,7 @@ input WatchingSubscriptionWhereInput {
 
 input WatchingUpdateInput {
   business: BusinessUpdateOneWithoutWatchersInput
-  watcher: UserUpdateOneWithoutWatchingInput
+  user: UserUpdateOneWithoutWatchingInput
 }
 
 input WatchingUpdateManyWithoutBusinessInput {
@@ -2198,20 +2198,20 @@ input WatchingUpdateManyWithoutBusinessInput {
   upsert: [WatchingUpsertWithWhereUniqueWithoutBusinessInput!]
 }
 
-input WatchingUpdateManyWithoutWatcherInput {
-  create: [WatchingCreateWithoutWatcherInput!]
+input WatchingUpdateManyWithoutUserInput {
+  create: [WatchingCreateWithoutUserInput!]
   connect: [WatchingWhereUniqueInput!]
   disconnect: [WatchingWhereUniqueInput!]
   delete: [WatchingWhereUniqueInput!]
-  update: [WatchingUpdateWithWhereUniqueWithoutWatcherInput!]
-  upsert: [WatchingUpsertWithWhereUniqueWithoutWatcherInput!]
+  update: [WatchingUpdateWithWhereUniqueWithoutUserInput!]
+  upsert: [WatchingUpsertWithWhereUniqueWithoutUserInput!]
 }
 
 input WatchingUpdateWithoutBusinessDataInput {
-  watcher: UserUpdateOneWithoutWatchingInput
+  user: UserUpdateOneWithoutWatchingInput
 }
 
-input WatchingUpdateWithoutWatcherDataInput {
+input WatchingUpdateWithoutUserDataInput {
   business: BusinessUpdateOneWithoutWatchersInput
 }
 
@@ -2220,9 +2220,9 @@ input WatchingUpdateWithWhereUniqueWithoutBusinessInput {
   data: WatchingUpdateWithoutBusinessDataInput!
 }
 
-input WatchingUpdateWithWhereUniqueWithoutWatcherInput {
+input WatchingUpdateWithWhereUniqueWithoutUserInput {
   where: WatchingWhereUniqueInput!
-  data: WatchingUpdateWithoutWatcherDataInput!
+  data: WatchingUpdateWithoutUserDataInput!
 }
 
 input WatchingUpsertWithWhereUniqueWithoutBusinessInput {
@@ -2231,10 +2231,10 @@ input WatchingUpsertWithWhereUniqueWithoutBusinessInput {
   create: WatchingCreateWithoutBusinessInput!
 }
 
-input WatchingUpsertWithWhereUniqueWithoutWatcherInput {
+input WatchingUpsertWithWhereUniqueWithoutUserInput {
   where: WatchingWhereUniqueInput!
-  update: WatchingUpdateWithoutWatcherDataInput!
-  create: WatchingCreateWithoutWatcherInput!
+  update: WatchingUpdateWithoutUserDataInput!
+  create: WatchingCreateWithoutUserInput!
 }
 
 input WatchingWhereInput {
@@ -2304,7 +2304,7 @@ input WatchingWhereInput {
   """
   id_not_ends_with: ID
   business: BusinessWhereInput
-  watcher: UserWhereInput
+  user: UserWhereInput
 }
 
 input WatchingWhereUniqueInput {
