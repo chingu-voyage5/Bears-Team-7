@@ -20,8 +20,6 @@ type Business {
   photos: String
   watchers: [Watching!]!
   lovers: [Loving!]!
-  isLoved: Boolean! @default(value: "false")
-  isWatched: Boolean! @default(value: "false")
 }
 
 type Location {
