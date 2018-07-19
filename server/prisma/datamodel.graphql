@@ -7,7 +7,7 @@ type User {
   loving: [Loving!]!
 }
 
-type Business {
+type Place {
   id: ID! @unique
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -40,12 +40,12 @@ type Categories {
 
 type Loving {
   id: ID! @unique
-  business: Business!
+  place: Place!
   user: User!
 }
 
 type Watching {
   id: ID! @unique
-  business: Business!
+  place: Place!
   user: User!
 }

@@ -10,7 +10,7 @@ const business = {
       throw new Error(`Invalid permissions, you must be an active user`)
     }
 
-    const placeExists = await context.db.exists.Business({
+    const placeExists = await context.db.exists.Place({
         yelpId: args.yelpId
       },
       info
@@ -19,7 +19,7 @@ const business = {
     if (placeExists) {
       throw new Error(`${args.name} already created`)
     }
-    const newPlace = await context.db.mutation.createBusiness({
+    const newPlace = await context.db.mutation.createPlace({
         data: {
           yelpId: args.yelpId,
           name: args.name,
@@ -57,7 +57,7 @@ const business = {
     const updates = { ...args
     }
     delete updates.id
-    return context.db.mutation.updateBusiness({
+    return context.db.mutation.updatePlace({
       where: {
         id: args.id
       },

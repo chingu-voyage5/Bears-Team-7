@@ -1,9 +1,9 @@
-# import User, Business, Location, Coordinates, Categories, Loving, Watching from "./generated/prisma.graphql"
+# import User, Place, Location, Coordinates, Categories, Loving, Watching from "./generated/prisma.graphql"
 
 type Query {
   me: User
-  business(id: String!): Business! #Resto Api
-  businesses: [Business!]! #Resto Api
+  business(id: String!): Place! #Resto Api
+  businesses: [Place!]! #Resto Api
   lovedSharedByUser(id: String!): [Loving!]!
   watchedSharedByUser(id: String!): [Watching!]!
   searchFromYelp(term: String!, location: String!, limit: Int = 5): Businesses # Yelp Api
@@ -60,11 +60,22 @@ type User {
   watching: [Watching!]!
 }
 
+type SuccessMessage {
+  message: String
+}
+
+# Data from Yelp Api
+type Business {
+  id: String!
+  name: String!
+  price: String
+  location: Location
+  coordinates: Coordinates
+  categories: [Categories!]!
+  photos: [String!]
+}
+
 type Businesses {
   business: [Business!]!
   total: Int
-}
-
-type SuccessMessage {
-  message: String
 }
