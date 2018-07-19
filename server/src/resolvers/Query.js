@@ -14,7 +14,7 @@ const Query = {
   async business(parent, {
     id
   }, context, info) {
-    const queriedBusiness = await context.db.query.business({
+    const queriedBusiness = await context.db.query.place({
         where: {
           id
         }
@@ -27,7 +27,7 @@ const Query = {
     throw new Error(`Couldn't find business id: ${id}`)
   },
   async businesses(parent, args, context, info) {
-    const queriedBusinesses = await context.db.query.businesses({
+    const queriedBusinesses = await context.db.query.places({
 
     }, info)
 
